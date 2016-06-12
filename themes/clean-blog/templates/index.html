@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block navbar_brand %}
+{% if not articles_page or (articles_page and articles_page.number > 1) %}<a class="navbar-brand" href="{{ SITEURL }}/">Home</a>{% endif %}
+{% endblock navbar_brand %}
+
+{% block header %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    {% if output_file == 'index.html' %}
+        <header class="intro-header" style="background-image: url('{{ SITEURL }}/images/banners/DSC_0052.jpg')">
+    {% elif HEADER_COVER %}
+        <header class="intro-header" style="background-image: url('{{ HEADER_COVER }}')">
+    {% elif HEADER_COLOR %}
+        <header class="intro-header" style="background-color: {{ HEADER_COLOR }}">
+    {% else %}
+        {#<header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/post-bg.jpg')">#}
+        <header class="intro-header" style="background-image: url('{{ SITEURL }}/{{ output_file | random_banner}}')">
+    {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>{{ SITENAME }}</h1>
+                        {% if SITESUBTITLE %}
+                            <hr class="small">
+                            <span class="subheading">{{ SITESUBTITLE }}</span>
+                        {% endif %}
+                        {% if SOCIAL and SHOW_SOCIAL_ON_INDEX_PAGE_HEADER %}
+                            <ul class="list-inline text-center">
+                            {% for name,link in SOCIAL %}
+                                <li>
+                                    <a href="{{ link }}">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-{{ name|lower }} fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock header %}
+
+{% block content %}
+    {% for article in articles_page.object_list %}
+        {% if not loop.first %}<hr>{% endif %}
+        <div class="post-preview">
+            <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">
+                <h2 class="post-title">
+                    {{ article.title }}
+                </h2>
+            </a>
+            {% if SHOW_FULL_ARTICLE %}
+                {{ article.content }}
+            {% elif article.has_summary %}
+                <p>{{ article.summary }}</p>
+            {% elif article.summary %}
+                {# <p>{{ article.summary|striptags|truncate(140) }}</p> #}
+                <p>{{ article.summary|striptags }}</p>
+            {% endif %}
+            <p class="post-meta">Posted {# by
+                {% for author in article.authors %}
+                    <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                {% endfor %} #}
+                 on {{ article.locale_date }} {% include 'comments_inline.html' %}
+            </p>
+            {# % include 'comments.html' % #}
+        </div>
+    {% endfor %}
+
+    {% include "pagination.html" %}
+{% endblock content %}
