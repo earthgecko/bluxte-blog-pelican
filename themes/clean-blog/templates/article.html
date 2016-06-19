@@ -150,8 +150,9 @@
     {% endif %}
 
     {% if ISSO_SERVER and article.status != "draft" %}
-        <div class="comments" id="isso-thread"></div>
-        <noscript>Please enable JavaScript to view the comments.</noscript>
+        <div class="comments" id="isso-thread" data-title="{{article.title}}">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
     {% endif %}
 
     <hr>

@@ -37,7 +37,7 @@ PLUGINS = ["assets", "neighbors"]
 # ---------- Feeds
 
 if PUBLISH:
-    FEED_ALL_RSS = 'index.xml'
+    FEED_ALL_RSS = 'rss.xml'
 else:
     FEED_ALL_RSS = None
 
