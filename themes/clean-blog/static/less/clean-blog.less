@@ -20,6 +20,14 @@ img {
 }
 
 .content {
+	// Make it consistent with the article's top margin
+	padding-left: 1.2em;
+	padding-right: 1.2em;
+
+	.article {
+		// <p> has it, but we may have some direct text
+		margin-top: 1.2em;
+	}
 	p, dt, li {
 		line-height: 1.7;
 		a {
@@ -48,7 +56,6 @@ h5,
 h6 {
 	.sans-serif;
 	font-weight: @heading-weight;
-	//color: darken(@brand-primary, 10%);
 	color: @brand-primary;
 }
 
@@ -95,15 +102,14 @@ hr.small {
 	.nav {
 		li {
 			a {
-				text-transform: uppercase;
-				font-size: 14px;
+				font-size: 18px;
 				font-weight: @navbar-weight;
 				letter-spacing: 1px;
 			}
 		}
 	}
 	@media only screen and (min-width: 768px) {
-		text-shadow: #000 0 0 10px;
+		text-shadow: 0 0 5px black, 0 0 20px black;
 		background: transparent;
 		border-bottom: 1px solid transparent;
 		.navbar-brand {
@@ -128,7 +134,6 @@ hr.small {
 		}
 	}
 	@media only screen and (min-width: 1170px) {
-		text-shadow: none;
 		-webkit-transition: background-color 0.3s;
 		-moz-transition: background-color 0.3s;
 		transition: background-color 0.3s;
@@ -142,6 +147,7 @@ hr.small {
 		backface-visibility: hidden;
 		&.is-fixed {
 			/* when the user scrolls down, we hide the header right above the viewport */
+			text-shadow: none;
 			position: fixed;
 			top: -61px;
 			background-color: fade(white, 90%);
@@ -188,10 +194,9 @@ hr.small {
 	background-color: @gray;
 	background: no-repeat center center;
 	background-attachment: scroll;
-	text-shadow: #000 0 0 20px;
+	text-shadow: 0 0 5px black, 0 0 20px black;
 	.background-cover;
 	// NOTE: Background images are set within the HTML using inline CSS!
-	margin-bottom: 20px; //50px;
 	.site-heading,
 	.post-heading,
 	.page-heading {
@@ -257,6 +262,10 @@ hr.small {
 				font-size: 30px;
 			}
 		}
+	}
+
+	@media only screen and (min-width: 768px) {
+		text-shadow: 0 0 10px black, 0 0 30px black;
 	}
 }
 
@@ -401,7 +410,6 @@ form .row:first-child .floating-label-form-group {
 
 .btn {
 	.sans-serif;
-	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 800;
 	letter-spacing: 1px;
@@ -433,7 +441,6 @@ form .row:first-child .floating-label-form-group {
 		> a,
 		> span {
 			.sans-serif;
-			text-transform: uppercase;
 			font-size: 14px;
 			font-weight: 800;
 			letter-spacing: 1px;
